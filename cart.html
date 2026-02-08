@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة المشتريات | منصة الأثاث والديكور</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">🏠 منصة الأثاث والديكور الفاخرة</div>
+            <nav>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+                <a href="about.html" class="nav-link">ℹ️ عن المنصة</a>
+                <a href="shop.html" class="nav-link">🛒 المتجر</a>
+                <a href="contact.html" class="nav-link">📞 تواصل</a>
+            </nav>
+            <span class="icons">
+                <img src="assets/icons/search.svg" alt="بحث" class="icon" title="بحث">
+                <img src="assets/icons/cart.svg" alt="سلة المشتريات" class="icon" title="السلة">
+                <span class="cart-count"></span>
+                <img src="assets/icons/user.svg" alt="البروفايل" class="icon" title="البروفايل">
+            </span>
+        </div>
+    </header>
+
+    <main>
+        <!-- صفحة فوقية لسلة المشتريات -->
+        <section class="page-header">
+            <div class="header-content">
+                <h1>🛒 سلة المشتريات</h1>
+                <p>استعرض المنتجات المضافة إلى سلتك</p>
+            </div>
+        </section>
+
+        <!-- محتوى السلة -->
+        <section style="padding: 60px 40px; background: white;">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <div id="cart-content"></div>
+            </div>
+        </section>
+
+        <!-- دعوة للعمل -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>جاهز للتسوق أكثر؟</h2>
+                <p>استكشف المزيد من المنتجات الفاخرة</p>
+                <a href="shop.html" class="btn btn-secondary btn-large" style="background: white; color: #667eea; border: 2px solid white;">🛍️ استمر في التسوق</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>عن المنصة</h3>
+                <p>منصة متخصصة في تجارة الأثاث والديكور المنزلي الفاخر بأعلى جودة</p>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="shop.html">المتجر</a></li>
+                    <li><a href="about.html">عن المنصة</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تابعنا</h3>
+                <div class="social-links">
+                    <a href="#" title="فيسبوك">f</a>
+                    <a href="#" title="تويتر">𝕏</a>
+                    <a href="#" title="إنستجرام">📷</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>🏪 منصة الأثاث والديكور الفاخرة © 2026 | جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="js/shared.js"></script>
+    <script src="js/admin-panel.js"></script>
+    <script>
+        function displayCart() {
+            const cart = CartManager.getCart();
+            const container = document.getElementById('cart-content');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <div style="font-size: 4em; margin-bottom: 20px;">🛒</div>
+                        <h2 style="color: #1e3c72; margin-bottom: 15px; font-size: 1.8em;">سلتك فارغة</h2>
+                        <p style="color: #666; margin-bottom: 30px; font-size: 1.1em;">يبدو أنك لم تضف أي منتجات بعد</p>
+                        <a href="shop.html" class="btn btn-primary btn-large" style="max-width: 300px; margin: 0 auto;">🛍️ ابدأ التسوق الآن</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: #1e3c72; margin-bottom: 20px; font-size: 1.6em;">المنتجات المضافة (${cart.length})</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px;">
+            `;
+
+            cart.forEach((item, index) => {
+                html += `
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                        <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 200px; object-fit: cover;">
+                        <div style="padding: 20px;">
+                            <h3 style="color: #1e3c72; margin-bottom: 10px;">${item.name}</h3>
+                            <div style="color: #667eea; font-size: 1.3em; font-weight: bold; margin-bottom: 15px;">${item.price} ج.م</div>
+                            <div style="font-size: 0.9em; color: #999; margin-bottom: 15px;">تم الإضافة: ${new Date(item.addedAt).toLocaleDateString('ar-SA')}</div>
+                            <button onclick="removeFromCart(${index})" style="width: 100%; background: #ff4757; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: 600;">🗑️ إزالة</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; text-align: center;">
+                    <h3 style="font-size: 1.5em; margin-bottom: 20px;">ملخص الطلب</h3>
+                    <div style="font-size: 2em; font-weight: bold; margin-bottom: 20px;" id="total-price"></div>
+                    <button onclick="checkout()" style="background: white; color: #667eea; border: none; padding: 15px 40px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.1em;">✅ إتمام الشراء</button>
+                </div>
+            `;
+
+            container.innerHTML = html;
+
+            // حساب الإجمالي
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('total-price').textContent = `الإجمالي: ${total} ج.م`;
+        }
+
+        function removeFromCart(index) {
+            if (confirm('هل أنت متأكد من رغبتك في إزالة هذا المنتج؟')) {
+                CartManager.removeFromCart(index);
+                displayCart();
+            }
+        }
+
+        function checkout() {
+            alert('✅ تم استقبال طلبك بنجاح!\n\nشكراً لك على التسوق معنا. سيتم معالجة طلبك قريباً وتسليمه خلال 2-5 أيام عمل.');
+            CartManager.cart = [];
+            localStorage.removeItem('cart');
+            displayCart();
+        }
+
+        // عرض السلة عند تحميل الصفحة
+        displayCart();
+    </script>
+</body>
+</html>
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-table tr:last-child td {
+            border-bottom: none;
+        }
+        .remove-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .remove-btn:hover {
+            opacity: 0.9;
+        }
+        .cart-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .cart-summary p {
+            font-size: 1.2em;
+            color: #333;
+            margin: 10px 0;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        .empty-cart h2 {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        .back-btn:hover {
+            opacity: 0.9;
+        }
+        .checkout-btn {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            margin-left: 10px;
+        }
+        .checkout-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏠 منصة الأثاث والديكور الفاخرة</h1>
+        <nav>
+            <a href="index.html">🏠 الرئيسية</a>
+            <a href="about.html">ℹ️ عن المنصة</a>
+            <a href="shop.html">🛒 المتجر</a>
+            <a href="orders.html">📦 طلباتي</a>
+            <a href="contact.html">📞 تواصل وآراء</a>
+            <a href="admin.html">⚙️ إدارة</a>
+            <span class="icons">
+                <img src="assets/icons/search.svg" alt="بحث" class="icon" title="بحث">
+                <img src="assets/icons/cart.svg" alt="سلة المشتريات" class="icon" title="السلة">
+                <span class="cart-count"></span>
+                <img src="assets/icons/user.svg" alt="البروفايل" class="icon" title="البروفايل">
+            </span>
+        </nav>
+    </header>
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 20px; text-align: center; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.95em; flex: 1;"><strong>🔐 منطقة محمية</strong> - هذه نسختك الخاصة من السلة</span>
+        <button onclick="logoutAdmin()" style="background: #f5576c; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600; white-space: nowrap;">🚪 تسجيل خروج</button>
+    </div>
+    <main>
+        <section class="cart-container">
+            <h1>🛒 سلة المشتريات</h1>
+            <div id="cart-content">
+                <!-- سيتم عرض محتوى السلة هنا -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>🏪 منصة الأثاث والديكور الفاخرة © 2026 | جميع الحقوق محفوظة</p>
+    </footer>
+    <script src="js/shared.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin-panel.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

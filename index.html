@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الأثاث والديكور الفاخرة | SAYMON</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .section-tab {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .section-tab.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .nav-link.active {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">🏠 منصة الأثاث والديكور الفاخرة</div>
+            <nav>
+                <a href="#" class="nav-link active" onclick="showSection('home'); return false;">🏠 الرئيسية</a>
+                <a href="#" class="nav-link" onclick="showSection('about'); return false;">ℹ️ عن المنصة</a>
+                <a href="#" class="nav-link" onclick="showSection('shop'); return false;">🛒 المتجر</a>
+                <a href="#" class="nav-link" onclick="showSection('contact'); return false;">📞 تواصل</a>
+                <a href="#" class="nav-link" onclick="showSection('cart'); return false;">🛍️ السلة</a>
+                <a href="#" class="nav-link" onclick="openAdminPanel(); return false;" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 8px 15px; border-radius: 5px; font-weight: bold; margin-right: 10px;">⚙️ التحكم</a>
+            </nav>
+            <span class="icons">
+                <img src="assets/icons/search.svg" alt="بحث" class="icon" title="بحث">
+                <img src="assets/icons/cart.svg" alt="سلة المشتريات" class="icon" title="السلة" onclick="showSection('cart'); return false;">
+                <span class="cart-count"></span>
+                <img src="assets/icons/user.svg" alt="البروفايل" class="icon" title="البروفايل">
+            </span>
+        </div>
+    </header>
+
+    <main>
+        <!-- ==================== الرئيسية ==================== -->
+        <div id="home" class="section-tab active">
+            <!-- صورة البطل -->
+            <section class="hero-banner">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">تصميم منزلك بأناقة وفخامة</h1>
+                    <p class="hero-subtitle">اكتشف أحدث تشكيلات الأثاث والديكور المنزلي الفاخر بأسعار منافسة</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary" onclick="showSection('shop'); return false;">🛍️ ابدأ التسوق</a>
+                        <a href="#" class="btn btn-secondary" onclick="showSection('about'); return false;">📖 تعرف علينا</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- الإحصائيات -->
+            <section class="stats-section">
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-number">19+</div>
+                        <div class="stat-label">منتج فاخر</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">5⭐</div>
+                        <div class="stat-label">رضا العملاء</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">جودة مضمونة</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">دعم فني</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- المنتجات المميزة -->
+            <section class="featured-section">
+                <div style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+                    <div class="section-header">
+                        <h2>✨ المنتجات المميزة</h2>
+                        <p>اختيارات مشهورة من أفضل تشكيلاتنا</p>
+                    </div>
+                    <div id="featured-products"></div>
+                </div>
+            </section>
+
+            <!-- المزايا -->
+            <section class="benefits-section">
+                <div class="benefits-container">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🚚</div>
+                        <h3>توصيل سريع</h3>
+                        <p>ضمان توصيل آمن وسريع لجميع أنحاء المملكة</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">💳</div>
+                        <h3>دفع آمن</h3>
+                        <p>خيارات دفع متعددة وآمنة 100%</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔄</div>
+                        <h3>استرجاع سهل</h3>
+                        <p>سياسة استرجاع مرنة خلال 30 يوم</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⭐</div>
+                        <h3>جودة عالية</h3>
+                        <p>منتجات من أعلى الماركات العالمية</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- التصنيفات -->
+            <section class="categories-section">
+                <div style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+                    <div class="section-header">
+                        <h2>🏷️ تصفح التصنيفات</h2>
+                        <p>ابحث عن منتجاتك المفضلة حسب التصنيف</p>
+                    </div>
+                    <div class="categories-grid">
+                        <div class="category-card">
+                            <div class="category-emoji">🛋️</div>
+                            <h3>أثاث المقاعد</h3>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-emoji">🪑</div>
+                            <h3>الكراسي</h3>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-emoji">🛏️</div>
+                            <h3>غرف النوم</h3>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-emoji">💡</div>
+                            <h3>الإضاءة</h3>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-emoji">🖼️</div>
+                            <h3>الديكور</h3>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-emoji">🪴</div>
+                            <h3>النباتات</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- الآراء -->
+            <section class="testimonials-section">
+                <div style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+                    <div class="section-header">
+                        <h2>💬 آراء عملائنا</h2>
+                        <p>تقييمات حقيقية من عملاء راضين</p>
+                    </div>
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"منتجات عالية الجودة وخدمة ممتازة جداً. سأعود للتسوق مرة أخرى"</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">👩</div>
+                                <div>
+                                    <div class="author-name">فاطمة محمد</div>
+                                    <div class="author-date">مشتري مثقق</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"توصيل سريع جداً والمنتج كما هو في الصور. أنصح الجميع"</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">👨</div>
+                                <div>
+                                    <div class="author-name">أحمد علي</div>
+                                    <div class="author-date">مشتري مثقق</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <p>"أفضل منصة للأثاث. الأسعار منافسة والجودة عالية جداً"</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">👩‍🦰</div>
+                                <div>
+                                    <div class="author-name">سارة حسن</div>
+                                    <div class="author-date">مشتري مثقق</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- دعوة للعمل -->
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>هل أنت مستعد لتحسين منزلك؟</h2>
+                    <p>اكتشف مجموعتنا الكاملة من الأثاث والديكور الفاخر الآن</p>
+                    <a href="#" class="btn btn-primary btn-large" onclick="showSection('shop'); return false;">تسوق الآن 🛍️</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== عن المنصة ==================== -->
+        <div id="about" class="section-tab">
+            <section class="page-header about-header">
+                <div class="header-content">
+                    <h1>عن منصة الأثاث والديكور الفاخرة</h1>
+                    <p>نحن هنا لتحويل منزلك إلى حلم جميل</p>
+                </div>
+            </section>
+
+            <section class="intro-section">
+                <div class="intro-content">
+                    <div class="intro-text">
+                        <h2>من نحن؟</h2>
+                        <p>نحن منصة متخصصة في تجارة الأثاث والديكور المنزلي الفاخر. بدأنا رحلتنا بحلم واحد: توفير أثاث وديكور عالي الجودة بأسعار منافسة وخدمة عملاء لا تضاهى.</p>
+                        <p>لسنوات، اكتسبنا سمعة طيبة كمنصة موثوقة ومهنية، حيث نقدم أفضل الاختيارات من أشهر الماركات العالمية والمحلية.</p>
+                    </div>
+                    <div class="intro-image">
+                        <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 5em;">
+                            🏠
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mission-vision-section" style="padding: 60px 40px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                <div class="mission-vision-container">
+                    <div class="mission-card">
+                        <div class="card-icon">🎯</div>
+                        <h3>رسالتنا</h3>
+                        <p>تحويل منزلك إلى فراغ فني جميل يعكس شخصيتك وذوقك من خلال أثاث وديكور عالي الجودة بأسعار منافسة وخدمة احترافية متميزة.</p>
+                    </div>
+                    <div class="vision-card">
+                        <div class="card-icon">👁️</div>
+                        <h3>رؤيتنا</h3>
+                        <p>أن نكون المنصة الموثوقة الأولى في المنطقة لشراء الأثاث والديكور المنزلي الفاخر، معروفة بجودتها وخدماتها المتميزة.</p>
+                    </div>
+                    <div class="values-card">
+                        <div class="card-icon">✨</div>
+                        <h3>قيمنا</h3>
+                        <p>الجودة والصدق والابتكار والخدمة المتقنة. نؤمن بأن كل عميل يستحق أفضل تجربة تسوق وأفضل منتج بسعر عادل.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features-section" style="padding: 60px 40px; background: white;">
+                <div style="max-width: 1400px; margin: 0 auto;">
+                    <div class="section-header">
+                        <h2>لماذا تختارنا؟</h2>
+                        <p>مزايا تميزنا عن الآخرين</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-number">1️⃣</div>
+                            <h3>منتجات مختارة بعناية</h3>
+                            <p>كل منتج يخضع لمعايير الجودة العالية قبل عرضه</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-number">2️⃣</div>
+                            <h3>أسعار منافسة</h3>
+                            <p>نقدم أفضل الأسعار مع ضمان عدم خفض الجودة</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-number">3️⃣</div>
+                            <h3>خدمة عملاء 24/7</h3>
+                            <p>فريقنا دائماً متاح للإجابة على استفساراتك</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-number">4️⃣</div>
+                            <h3>توصيل سريع وآمن</h3>
+                            <p>ضمان وصول منتجاتك بأمان وفي الوقت المحدد</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-number">5️⃣</div>
+                            <h3>سياسة استرجاع مرنة</h3>
+                            <p>استرجاع سهل وسريع خلال 30 يوم بدون أسئلة</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-number">6️⃣</div>
+                            <h3>ضماناً شامل</h3>
+                            <p>جميع منتجاتنا مشمولة بضمان شامل</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== المتجر ==================== -->
+        <div id="shop" class="section-tab">
+            <section class="page-header">
+                <div class="header-content">
+                    <h1>🛍️ كتالوج المتجر</h1>
+                    <p>اكتشف مجموعتنا الكاملة من الأثاث والديكور الفاخر</p>
+                </div>
+            </section>
+
+            <section style="padding: 60px 40px; background: white;">
+                <div style="max-width: 1400px; margin: 0 auto;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 20px;">
+                        <div>
+                            <h2 style="color: #1e3c72; font-size: 1.8em; margin-bottom: 10px;">جميع المنتجات</h2>
+                            <p style="color: #666;">تصفح أفضل اختيارات الأثاث والديكور</p>
+                        </div>
+                        <button id="admin-button" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">⚙️ إدارة المنتجات</button>
+                    </div>
+
+                    <div id="product-list"></div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>لم تجد ما تبحث عنه؟</h2>
+                    <p>تواصل معنا لطلب منتج معين أو للحصول على عرض خاص</p>
+                    <a href="#" class="btn btn-secondary btn-large" style="background: white; color: #667eea; border: 2px solid white;" onclick="showSection('contact'); return false;">📞 تواصل معنا</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== تواصل معنا ==================== -->
+        <div id="contact" class="section-tab">
+            <section class="page-header contact-header">
+                <div class="header-content">
+                    <h1>تواصل معنا</h1>
+                    <p>نحن هنا لسماع آرائك واستفساراتك</p>
+                </div>
+            </section>
+
+            <section class="contact-container">
+                <section class="contact-info-section">
+                    <div style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+                        <div class="section-header">
+                            <h2>معلومات التواصل</h2>
+                            <p>يمكنك التواصل معنا بأي من الطرق التالية</p>
+                        </div>
+                        <div class="contact-info-grid">
+                            <div class="contact-info-card">
+                                <div class="info-icon">📞</div>
+                                <h3>الهاتف</h3>
+                                <p>+966 9 1234 5678</p>
+                                <p class="small">متاح من 9 صباحاً إلى 6 مساءً</p>
+                            </div>
+                            <div class="contact-info-card">
+                                <div class="info-icon">📧</div>
+                                <h3>البريد الإلكتروني</h3>
+                                <p>info@saymon.com</p>
+                                <p class="small">سنرد على بريدك في خلال 24 ساعة</p>
+                            </div>
+                            <div class="contact-info-card">
+                                <div class="info-icon">📍</div>
+                                <h3>العنوان</h3>
+                                <p>الرياض، المملكة العربية السعودية</p>
+                                <p class="small">الدقائق الحمراء - حي النسيم</p>
+                            </div>
+                            <div class="contact-info-card">
+                                <div class="info-icon">⏰</div>
+                                <h3>ساعات العمل</h3>
+                                <p>السبت - الخميس: 9 صباحاً - 6 مساءً</p>
+                                <p class="small">الجمعة: مغلق</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contact-form-section" style="padding: 60px 40px; background: white;">
+                    <div class="form-wrapper" style="max-width: 1400px; margin: 0 auto;">
+                        <div class="section-header">
+                            <h2>أرسل لنا رسالتك</h2>
+                            <p>سنكون سعداء بسماع منك</p>
+                        </div>
+
+                        <form id="contact-form" class="professional-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">الاسم الكامل *</label>
+                                    <input type="text" id="name" name="name" placeholder="محمد أحمد" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">البريد الإلكتروني *</label>
+                                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">رقم الهاتف</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="+966 9 1234 5678">
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">الموضوع *</label>
+                                    <select id="subject" name="subject" required>
+                                        <option value="">اختر موضوع الرسالة</option>
+                                        <option value="استفسار">استفسار عن المنتجات</option>
+                                        <option value="شكوى">شكوى أو مشكلة</option>
+                                        <option value="اقتراح">اقتراح أو ملاحظة</option>
+                                        <option value="أخرى">أخرى</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group full">
+                                <label for="message">الرسالة *</label>
+                                <textarea id="message" name="message" placeholder="اكتب رسالتك هنا..." rows="6" required></textarea>
+                            </div>
+
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="privacy" name="privacy" required>
+                                <label for="privacy">أوافق على سياسة الخصوصية والشروط والأحكام</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-large">📨 أرسل الرسالة</button>
+                        </form>
+
+                        <div id="form-response" class="form-response" style="display: none;"></div>
+                    </div>
+                </section>
+
+                <section class="faq-section" style="padding: 60px 40px; background: white;">
+                    <div style="max-width: 1400px; margin: 0 auto;">
+                        <div class="section-header">
+                            <h2>الأسئلة الشائعة</h2>
+                            <p>إجابات للأسئلة الشائعة التي تلقيناها</p>
+                        </div>
+                        <div class="faq-grid">
+                            <details class="faq-item">
+                                <summary>ما هي طرق الدفع المتاحة؟</summary>
+                                <p>نقدم عدة طرق دفع آمنة منها: التحويل البنكي، بطاقات الائتمان، محافظ رقمية، والدفع عند الاستلام.</p>
+                            </details>
+                            <details class="faq-item">
+                                <summary>كم مدة التوصيل؟</summary>
+                                <p>التوصيل عادة ما يستغرق 2-5 أيام عمل حسب المنطقة الجغرافية والمنتج المطلوب.</p>
+                            </details>
+                            <details class="faq-item">
+                                <summary>هل هناك ضمان على المنتجات؟</summary>
+                                <p>نعم، جميع منتجاتنا مشمولة بضمان شامل يغطي العيوب الصناعية لمدة سنة واحدة على الأقل.</p>
+                            </details>
+                            <details class="faq-item">
+                                <summary>ما هي سياسة الاسترجاع؟</summary>
+                                <p>يمكنك استرجاع أي منتج خلال 30 يوم من الشراء بدون أسئلة وبدون تكاليف شحن إضافية.</p>
+                            </details>
+                            <details class="faq-item">
+                                <summary>هل توجد خصومات للكميات الكبيرة؟</summary>
+                                <p>نعم، نقدم خصومات خاصة للطلبيات الكبيرة والعملاء المتكررين. تواصل معنا للمزيد من التفاصيل.</p>
+                            </details>
+                            <details class="faq-item">
+                                <summary>كيف أتتبع طلبيتي؟</summary>
+                                <p>سيتم إرسال رقم تتبع لبريدك الإلكتروني وسيكون بإمكانك تتبع الطلبية في أي وقت من خلال موقعنا.</p>
+                            </details>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+
+        <!-- ==================== السلة ==================== -->
+        <div id="cart" class="section-tab">
+            <section class="page-header">
+                <div class="header-content">
+                    <h1>🛒 سلة المشتريات</h1>
+                    <p>استعرض المنتجات المضافة إلى سلتك</p>
+                </div>
+            </section>
+
+            <section style="padding: 60px 40px; background: white;">
+                <div style="max-width: 1400px; margin: 0 auto;">
+                    <div id="cart-content"></div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>جاهز للتسوق أكثر؟</h2>
+                    <p>استكشف المزيد من المنتجات الفاخرة</p>
+                    <a href="#" class="btn btn-secondary btn-large" style="background: white; color: #667eea; border: 2px solid white;" onclick="showSection('shop'); return false;">🛍️ استمر في التسوق</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px 20px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 30px;">
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.2em; border-bottom: 2px solid #667eea; padding-bottom: 10px;">📞 التواصل</h3>
+                    <p style="margin: 10px 0;"><strong>الهاتف:</strong> <a href="tel:01019044529" style="color: #a8d5ff; text-decoration: none;">01019044529</a></p>
+                    <p style="margin: 10px 0;"><strong>البريد:</strong> <a href="mailto:www.mohamed12.link@gmail.com" style="color: #a8d5ff; text-decoration: none;">www.mohamed12.link@gmail.com</a></p>
+                    <p style="margin: 10px 0;"><strong>العنوان:</strong> كفرالشيخ، شارع الاستاد - مصر</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.2em; border-bottom: 2px solid #667eea; padding-bottom: 10px;">⏰ ساعات العمل</h3>
+                    <p style="margin: 10px 0;"><strong>ساعات العمل:</strong> 9 صباحاً - 12 مساءً</p>
+                    <p style="margin: 10px 0;"><strong>الدعم الفني:</strong> 24/24 طوال السنة</p>
+                    <p style="margin: 10px 0;"><strong>خدمة العملاء:</strong> 24/24 طوال الأسبوع</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.2em; border-bottom: 2px solid #667eea; padding-bottom: 10px;">🔗 روابط سريعة</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="index.html" style="color: #a8d5ff; text-decoration: none; margin: 8px 0; display: block;">🏠 الصفحة الرئيسية</a></li>
+                        <li><a href="shop.html" style="color: #a8d5ff; text-decoration: none; margin: 8px 0; display: block;">🛒 المتجر</a></li>
+                        <li><a href="about.html" style="color: #a8d5ff; text-decoration: none; margin: 8px 0; display: block;">ℹ️ عن المنصة</a></li>
+                        <li><a href="contact.html" style="color: #a8d5ff; text-decoration: none; margin: 8px 0; display: block;">📞 اتصل بنا</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; text-align: center;">
+                <p style="margin: 10px 0; font-size: 0.9em;">🏪 منصة الأثاث والديكور الفاخرة © 2026 | جميع الحقوق محفوظة</p>
+                <p style="margin: 10px 0; font-size: 0.9em; color: #a8d5ff;">مرحباً بك في أفضل منصة متخصصة في الأثاث والديكور الفاخر</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== لوحة التحكم (Admin Panel Modal) ==================== -->
+    <div id="admin-modal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); overflow-y: auto; direction: rtl;">
+        <div style="background: white; margin: 20px auto; padding: 0; border-radius: 15px; width: 95%; max-width: 1000px; box-shadow: 0 10px 80px rgba(0,0,0,0.5);">
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 15px 15px 0 0; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h2 style="margin: 0; font-size: 1.8em;">⚙️ لوحة التحكم الإدارية</h2>
+                    <p style="margin: 5px 0 0 0; opacity: 0.9; font-size: 0.9em;">إدارة كاملة للمنصة</p>
+                </div>
+                <span onclick="closeAdminPanel()" style="font-size: 32px; cursor: pointer; font-weight: bold; opacity: 0.8;">×</span>
+            </div>
+
+            <div style="padding: 30px; max-height: calc(100vh - 150px); overflow-y: auto;">
+                <div style="display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid #e0e0e0; flex-wrap: wrap;">
+                    <button onclick="switchAdminTab('products')" style="padding: 12px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">📦 إدارة المنتجات</button>
+                    <button onclick="switchAdminTab('analytics')" style="padding: 12px 25px; background: #f0f0f0; color: #333; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">📊 الإحصائيات</button>
+                    <button onclick="switchAdminTab('settings')" style="padding: 12px 25px; background: #f0f0f0; color: #333; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">⚙️ الإعدادات</button>
+                    <button onclick="logoutAdmin()" style="padding: 12px 25px; background: #ff4757; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-left: auto;">🚪 تسجيل خروج</button>
+                </div>
+
+                <div id="products-tab" style="display: block;">
+                    <h3 style="color: #667eea; font-size: 1.3em; margin-bottom: 20px;">📦 إدارة المنتجات</h3>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 30px; border: 2px dashed #667eea;">
+                        <h4 style="color: #667eea; margin-top: 0;">➕ إضافة منتج جديد</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <input type="text" id="product-name" placeholder="اسم المنتج *" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="number" id="product-price" placeholder="السعر (ج.م) *" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="text" id="product-category" placeholder="التصنيف *" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="text" id="product-image" placeholder="رابط الصورة *" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            <textarea id="product-description" placeholder="الوصف" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; grid-column: 1/-1; min-height: 80px;"></textarea>
+                            <button onclick="addNewProduct()" style="grid-column: 1/-1; padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1em;">✅ إضافة المنتج</button>
+                        </div>
+                    </div>
+
+                    <h4 style="color: #667eea; margin-bottom: 15px;">📋 المنتجات الحالية</h4>
+                    <div id="products-list" style="max-height: 400px; overflow-y: auto;"><p style="text-align: center; color: #999;">جاري تحميل المنتجات...</p></div>
+                </div>
+
+                <div id="analytics-tab" style="display: none;">
+                    <h3 style="color: #667eea; font-size: 1.3em; margin-bottom: 20px;">📊 الإحصائيات</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 2.5em; font-weight: bold;" id="stat-products">0</div>
+                            <div style="margin-top: 10px; opacity: 0.9;">عدد المنتجات</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 2.5em; font-weight: bold;" id="stat-cart">0</div>
+                            <div style="margin-top: 10px; opacity: 0.9;">عناصر في السلة</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                            <div style="font-size: 2.5em; font-weight: bold;" id="stat-visits">0</div>
+                            <div style="margin-top: 10px; opacity: 0.9;">زيارات</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings-tab" style="display: none;">
+                    <h3 style="color: #667eea; font-size: 1.3em; margin-bottom: 20px;">⚙️ الإعدادات</h3>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #667eea;">🔒 تغيير كلمة المرور</h4>
+                        <div style="display: grid; gap: 15px;">
+                            <input type="password" id="new-password" placeholder="كلمة المرور الجديدة" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="password" id="confirm-password" placeholder="تأكيد كلمة المرور" style="padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            <button onclick="changePassword()" style="padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">💾 حفظ كلمة المرور</button>
+                        </div>
+                        <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+                        <h4 style="color: #667eea;">🗑️ إجراءات خطرة</h4>
+                        <button onclick="clearAllCart()" style="padding: 12px 25px; background: #ff9800; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">🗑️ حذف كل السلة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/shared.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin-panel.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        function openAdminPanel() {
+            const adminModal = document.getElementById('admin-modal');
+            if (adminModal) {
+                adminModal.style.display = 'block';
+                loadAdminData();
+            }
+        }
+
+        function closeAdminPanel() {
+            const adminModal = document.getElementById('admin-modal');
+            if (adminModal) {
+                adminModal.style.display = 'none';
+            }
+        }
+
+        function switchAdminTab(tabName) {
+            document.getElementById('products-tab').style.display = 'none';
+            document.getElementById('analytics-tab').style.display = 'none';
+            document.getElementById('settings-tab').style.display = 'none';
+            document.getElementById(tabName + '-tab').style.display = 'block';
+        }
+
+        function loadAdminData() {
+            // احصل على عدد المنتجات من قاعدة البيانات
+            fetch('api/products.php')
+                .then(res => res.json())
+                .then(products => {
+                    const totalProducts = products ? products.length : 0;
+                    document.getElementById('stat-products').textContent = totalProducts;
+                    document.getElementById('stat-cart').textContent = CartManager.getCartCount();
+                    document.getElementById('stat-visits').textContent = Math.floor(Math.random() * 1000);
+
+                    // تحديث قائمة المنتجات في لوحة التحكم
+                    displayProductsInAdmin();
+                })
+                .catch(err => {
+                    console.error('خطأ في جلب المنتجات:', err);
+                    document.getElementById('stat-products').textContent = '؟';
+                });
+        }
+
+        function updateAdminStats() {
+            loadAdminData();
+        }
+
+        function displayProductsInAdmin() {
+            const productsList = document.getElementById('products-list');
+            if (!productsList) return;
+
+            // جلب المنتجات من قاعدة البيانات
+            fetch('api/products.php')
+                .then(res => res.json())
+                .then(products => {
+                    if (!products || products.length === 0) {
+                        productsList.innerHTML = '<p style="text-align: center; color: #999;">لا توجد منتجات حالياً</p>';
+                        return;
+                    }
+
+                    let html = '';
+                    products.forEach((product) => {
+                        html += `
+                            <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                <div style="flex: 1;">
+                                    <h4 style="margin: 0 0 5px 0;">${product.name}</h4>
+                                    <p style="margin: 0; font-size: 0.9em; color: #666;">السعر: ${product.price} ج.م | التصنيف: ${product.category}</p>
+                                    <img src="${product.image}" alt="${product.name}" style="max-width: 80px; height: 60px; border-radius: 5px; margin-top: 8px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/80x60?text=${product.name}'">
+                                </div>
+                                <button onclick="deleteProductFromAdmin(${product.id})" style="background: #ff4757; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; white-space: nowrap;">🗑️ حذف</button>
+                            </div>
+                        `;
+                    });
+                    productsList.innerHTML = html;
+                })
+                .catch(err => {
+                    productsList.innerHTML = '<p style="text-align: center; color: #999;">خطأ في جلب المنتجات</p>';
+                    console.error(err);
+                });
+        }
+
+        function deleteProductFromAdmin(productId) {
+            if (!confirm('هل أنت متأكد من حذف هذا المنتج؟')) return;
+            
+            fetch('api/products.php', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: productId
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert('✅ تم حذف المنتج بنجاح');
+                    loadAdminData();
+                    loadFeaturedProducts();
+                    loadShopProducts();
+                } else {
+                    alert('❌ خطأ: ' + (data.error || 'فشل حذف المنتج'));
+                }
+            })
+            .catch(err => {
+                alert('❌ خطأ في الاتصال: ' + err.message);
+                console.error(err);
+            });
+        }
+
+        function addNewProduct() {
+            const name = document.getElementById('product-name').value.trim();
+            const price = document.getElementById('product-price').value.trim();
+            const category = document.getElementById('product-category').value.trim();
+            const image = document.getElementById('product-image').value.trim();
+            const description = document.getElementById('product-description').value.trim();
+
+            if (!name || !price || !category || !image) {
+                alert('❌ يجب ملء جميع الحقول المطلوبة');
+                return;
+            }
+
+            // إرسال المنتج الجديد إلى قاعدة البيانات
+            fetch('api/products.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    price: parseFloat(price),
+                    category: category,
+                    image: image,
+                    description: description
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert('✅ تم إضافة المنتج بنجاح! سيظهر على الفور على المنصة');
+                    
+                    // مسح الحقول
+                    document.getElementById('product-name').value = '';
+                    document.getElementById('product-price').value = '';
+                    document.getElementById('product-category').value = '';
+                    document.getElementById('product-image').value = '';
+                    document.getElementById('product-description').value = '';
+
+                    // تحديث الواجهة
+                    setTimeout(() => {
+                        loadFeaturedProducts();
+                        loadShopProducts();
+                        loadAdminData();
+                    }, 500);
+                } else {
+                    alert('❌ حدث خطأ: ' + (data.error || 'فشل إضافة المنتج'));
+                }
+            })
+            .catch(err => {
+                alert('❌ خطأ في الاتصال: ' + err.message);
+                console.error(err);
+            });
+        }
+
+        function changePassword() {
+            const newPass = document.getElementById('new-password').value.trim();
+            const confirmPass = document.getElementById('confirm-password').value.trim();
+
+            if (newPass !== confirmPass) {
+                alert('❌ كلمات المرور غير متطابقة');
+                return;
+            }
+
+            if (newPass.length < 6) {
+                alert('❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+                return;
+            }
+
+            alert('✅ تم تغيير كلمة المرور بنجاح');
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-password').value = '';
+        }
+
+        function clearAllCart() {
+            if (confirm('هل تريد حذف كل السلة؟')) {
+                CartManager.clearCart();
+                alert('✅ تم حذف السلة');
+            }
+        }
+
+        function logoutAdmin() {
+            alert('✅ تم تسجيل الخروج بنجاح');
+            closeAdminPanel();
+        }
+    </script>
+    <script>
+        // تبديل الأقسام
+        function showSection(sectionId, event) {
+            if (event) event.preventDefault();
+            
+            // إخفاء جميع الأقسام
+            const sections = document.querySelectorAll('.section-tab');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // إظهار القسم المطلوب
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.classList.add('active');
+                
+                // تحميل المنتجات عند الذهاب للمتجر
+                if (sectionId === 'shop') {
+                    setTimeout(loadShopProducts, 100);
+                }
+                
+                // عرض السلة عند الذهاب لها
+                if (sectionId === 'cart') {
+                    setTimeout(displayCart, 100);
+                }
+            }
+
+            // تحديث nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // إضافة active للـ link المناسب
+            const activeLink = document.querySelector(`[onclick*="showSection('${sectionId}')"]`);
+            if (activeLink) activeLink.classList.add('active');
+
+            // scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // عرض السلة
+        function displayCart() {
+            const cart = CartManager.getCart();
+            const container = document.getElementById('cart-content');
+            if (!container) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <div style="font-size: 4em; margin-bottom: 20px;">🛒</div>
+                        <h2 style="color: #1e3c72; margin-bottom: 15px; font-size: 1.8em;">سلتك فارغة</h2>
+                        <p style="color: #666; margin-bottom: 30px; font-size: 1.1em;">يبدو أنك لم تضف أي منتجات بعد</p>
+                        <a href="#" class="btn btn-primary btn-large" style="max-width: 300px; margin: 0 auto; display: inline-block;" onclick="showSection('shop'); return false;">🛍️ ابدأ التسوق الآن</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: #1e3c72; margin-bottom: 20px; font-size: 1.6em;">المنتجات المضافة (${cart.length})</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px;">
+            `;
+
+            cart.forEach((item, index) => {
+                html += `
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                        <img src="${item.image}" alt="${item.name}" style="width: 100%; height: 200px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/250x200?text=${item.name}'">
+                        <div style="padding: 20px;">
+                            <h3 style="color: #1e3c72; margin-bottom: 10px;">${item.name}</h3>
+                            <div style="color: #667eea; font-size: 1.3em; font-weight: bold; margin-bottom: 15px;">${item.price} ج.م</div>
+                            <div style="font-size: 0.9em; color: #999; margin-bottom: 15px;">تم الإضافة: ${new Date(item.addedAt).toLocaleDateString('ar-SA')}</div>
+                            <button onclick="removeFromCart(${index})" style="width: 100%; background: #ff4757; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: 600;">🗑️ إزالة</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; text-align: center;">
+                    <h3 style="font-size: 1.5em; margin-bottom: 20px;">ملخص الطلب</h3>
+                    <div style="font-size: 2em; font-weight: bold; margin-bottom: 20px;" id="total-price"></div>
+                    <button onclick="checkout()" style="background: white; color: #667eea; border: none; padding: 15px 40px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.1em;">✅ إتمام الشراء</button>
+                </div>
+            `;
+
+            container.innerHTML = html;
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const totalEl = document.getElementById('total-price');
+            if (totalEl) totalEl.textContent = `الإجمالي: ${total} ج.م`;
+        }
+
+        function removeFromCart(index) {
+            if (confirm('هل أنت متأكد من رغبتك في إزالة هذا المنتج؟')) {
+                CartManager.removeFromCart(index);
+                displayCart();
+            }
+        }
+
+        function checkout() {
+            alert('✅ تم استقبال طلبك بنجاح!\n\nشكراً لك على التسوق معنا. سيتم معالجة طلبك قريباً وتسليمه خلال 2-5 أيام عمل.');
+            CartManager.clearCart();
+            displayCart();
+        }
+
+        // معالج نموذج التواصل
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+
+                console.log('تم إرسال الرسالة:', formData);
+                
+                const response = document.getElementById('form-response');
+                response.innerHTML = '✅ شكراً لك! تم استقبال رسالتك بنجاح. سنقوم بالرد عليك في أقرب وقت.';
+                response.className = 'form-response success';
+                response.style.display = 'block';
+
+                this.reset();
+                setTimeout(() => {
+                    response.style.display = 'none';
+                }, 5000);
+            });
+        }
+
+        // admin button
+        const adminBtn = document.getElementById('admin-button');
+        if (adminBtn) {
+            adminBtn.addEventListener('click', function() {
+                const adminModal = document.getElementById('admin-panel-modal');
+                if (adminModal) {
+                    adminModal.style.display = 'flex';
+                }
+            });
+        }
+
+        // تهيئة عند التحميل
+        window.addEventListener('load', function() {
+            CartManager.updateCartCount();
+        });
+
+        // وظيفة تحديث السلة عند التغيير
+        window.addEventListener('cartUpdated', function() {
+            CartManager.updateCartCount();
+        });
+
+        // دالة فتح لوحة التحكم
+        function openAdminPanel() {
+            const adminModal = document.getElementById('admin-modal');
+            if (adminModal) {
+                adminModal.style.display = 'block';
+                // قبول الفتح فقط عند تشغيل المنصة محلياً (localhost / 127.0.0.1 / file:)
+                const host = location.hostname;
+                const isLocal = (host === 'localhost' || host === '127.0.0.1' || location.protocol === 'file:');
+                if (!isLocal) {
+                    adminModal.style.display = 'none';
+                    alert('🚫 لوحة التحكم متاحة فقط من الجهاز المضيف المحلي');
+                    return;
+                }
+
+                // مسار احتياطي عند فتح الملف عبر file: (بعض المتصفحات لا تسمح بـfetch لملفات محلية)
+                if (location.protocol === 'file:') {
+                    const stored = localStorage.getItem('ownerKey');
+                    if (stored && stored.trim() === 'saymon-owner-2026') {
+                        loadAdminData();
+                        return;
+                    }
+
+                    // اسأل المستخدم المحلي لتأكيد أنه المالك — سيتم حفظ المفتاح محلياً فقط
+                    const confirmOwner = confirm('هل أنت المالك وتريد فتح لوحة التحكم على هذا المتصفح؟ (سيتم حفظ صلاحية الوصول محلياً)');
+                    if (confirmOwner) {
+                        localStorage.setItem('ownerKey', 'saymon-owner-2026');
+                        loadAdminData();
+                        return;
+                    } else {
+                        adminModal.style.display = 'none';
+                        alert('🚫 غير مصرح بفتح لوحة التحكم');
+                        return;
+                    }
+                }
+
+                // تحقق من وجود ملف owner.key ومطابقته عند الوصول عبر HTTP (localhost)
+                fetch('owner.key').then(res => {
+                    if (!res.ok) throw new Error('no-owner');
+                    return res.text();
+                }).then(token => {
+                    if (token && token.trim() === 'saymon-owner-2026') {
+                        loadAdminData();
+                    } else {
+                        adminModal.style.display = 'none';
+                        alert('🚫 غير مصرح بفتح لوحة التحكم');
+                    }
+                }).catch(() => {
+                    adminModal.style.display = 'none';
+                    alert('🚫 غير مصرح بفتح لوحة التحكم');
+                });
+            }
+        }
+
+        // دالة إغلاق لوحة التحكم
+        function closeAdminPanel() {
+            const adminModal = document.getElementById('admin-modal');
+            if (adminModal) {
+                adminModal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

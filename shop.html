@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المتجر | منصة الأثاث والديكور</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">🏠 منصة الأثاث والديكور الفاخرة</div>
+            <nav>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+                <a href="about.html" class="nav-link">ℹ️ عن المنصة</a>
+                <a href="shop.html" class="nav-link active">🛒 المتجر</a>
+                <a href="contact.html" class="nav-link">📞 تواصل</a>
+            </nav>
+            <span class="icons">
+                <img src="assets/icons/search.svg" alt="بحث" class="icon" title="بحث">
+                <img src="assets/icons/cart.svg" alt="سلة المشتريات" class="icon" title="السلة">
+                <span class="cart-count"></span>
+                <img src="assets/icons/user.svg" alt="البروفايل" class="icon" title="البروفايل">
+            </span>
+        </div>
+    </header>
+
+    <main>
+        <!-- صفحة فوقية للمتجر -->
+        <section class="page-header">
+            <div class="header-content">
+                <h1>🛍️ كتالوج المتجر</h1>
+                <p>اكتشف مجموعتنا الكاملة من الأثاث والديكور الفاخر</p>
+            </div>
+        </section>
+
+        <!-- قسم التصفية والمنتجات -->
+        <section style="padding: 60px 40px; background: white;">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 20px;">
+                    <div>
+                        <h2 style="color: #1e3c72; font-size: 1.8em; margin-bottom: 10px;">جميع المنتجات</h2>
+                        <p style="color: #666;">تصفح أفضل اختيارات الأثاث والديكور</p>
+                    </div>
+                    <button id="admin-button" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">⚙️ إدارة المنتجات</button>
+                </div>
+
+                <div id="product-list"></div>
+            </div>
+        </section>
+
+        <!-- قسم الدعوة للعمل -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>لم تجد ما تبحث عنه؟</h2>
+                <p>تواصل معنا لطلب منتج معين أو للحصول على عرض خاص</p>
+                <a href="contact.html" class="btn btn-secondary btn-large" style="background: white; color: #667eea; border: 2px solid white;">📞 تواصل معنا</a>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px 20px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 30px;">
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.2em; border-bottom: 2px solid #667eea; padding-bottom: 10px;">📞 التواصل</h3>
+                    <p style="margin: 10px 0;"><strong>الهاتف:</strong> <a href="tel:01019044529" style="color: #a8d5ff; text-decoration: none;">01019044529</a></p>
+                    <p style="margin: 10px 0;"><strong>البريد:</strong> <a href="mailto:www.mohamed12.link@gmail.com" style="color: #a8d5ff; text-decoration: none;">www.mohamed12.link@gmail.com</a></p>
+                    <p style="margin: 10px 0;"><strong>العنوان:</strong> كفرالشيخ، شارع الاستاد - مصر</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.2em; border-bottom: 2px solid #667eea; padding-bottom: 10px;">🕐 ساعات العمل</h3>
+                    <p style="margin: 10px 0;"><strong>ساعات العمل:</strong> 9 صباحاً - 12 مساءً</p>
+                    <p style="margin: 10px 0;"><strong>الدعم الفني:</strong> 24/24 طوال السنة</p>
+                    <p style="margin: 10px 0;"><strong>خدمة العملاء:</strong> 24/24 طوال الأسبوع</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 15px; font-size: 1.2em; border-bottom: 2px solid #667eea; padding-bottom: 10px;">🔗 روابط سريعة</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="index.html" style="color: #a8d5ff; text-decoration: none; margin: 8px 0; display: block;">🏠 الصفحة الرئيسية</a></li>
+                        <li><a href="shop.html" style="color: #a8d5ff; text-decoration: none; margin: 8px 0; display: block;">🛒 المتجر</a></li>
+                        <li><a href="about.html" style="color: #a8d5ff; text-decoration: none; margin: 8px 0; display: block;">ℹ️ عن المنصة</a></li>
+                        <li><a href="contact.html" style="color: #a8d5ff; text-decoration: none; margin: 8px 0; display: block;">📞 اتصل بنا</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; text-align: center;">
+                <p style="margin: 10px 0; font-size: 0.9em;">🏪 منصة الأثاث والديكور الفاخرة © 2026 | جميع الحقوق محفوظة</p>
+                <p style="margin: 10px 0; font-size: 0.9em; color: #a8d5ff;">مرحباً بك في أفضل منصة متخصصة في الأثاث والديكور الفاخر</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/shared.js"></script>
+    <script src="js/admin-panel.js"></script>
+    <script src="js/shop.js"></script>
+    <script>
+        document.getElementById('admin-button').addEventListener('click', function() {
+            document.getElementById('admin-panel-modal').style.display = 'flex';
+        });
+    </script>
+</body>
+</html>

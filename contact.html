@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا | منصة الأثاث والديكور</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">🏠 منصة الأثاث والديكور الفاخرة</div>
+            <nav>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+                <a href="about.html" class="nav-link">ℹ️ عن المنصة</a>
+                <a href="shop.html" class="nav-link">🛒 المتجر</a>
+                <a href="contact.html" class="nav-link active">📞 تواصل</a>
+            </nav>
+            <span class="icons">
+                <img src="assets/icons/search.svg" alt="بحث" class="icon" title="بحث">
+                <img src="assets/icons/cart.svg" alt="سلة المشتريات" class="icon" title="السلة">
+                <span class="cart-count"></span>
+                <img src="assets/icons/user.svg" alt="البروفايل" class="icon" title="البروفايل">
+            </span>
+        </div>
+    </header>
+
+    <main>
+        <!-- غلاف صفحة تواصل -->
+        <section class="page-header contact-header">
+            <div class="header-content">
+                <h1>تواصل معنا</h1>
+                <p>نحن هنا لسماع آرائك واستفساراتك</p>
+            </div>
+        </section>
+
+        <section class="contact-container">
+            <!-- معلومات التواصل -->
+            <section class="contact-info-section">
+                <div class="section-header">
+                    <h2>معلومات التواصل</h2>
+                    <p>يمكنك التواصل معنا بأي من الطرق التالية</p>
+                </div>
+                <div class="contact-info-grid">
+                    <div class="contact-info-card">
+                        <div class="info-icon">📞</div>
+                        <h3>الهاتف</h3>
+                        <p><a href="tel:01019044529" style="color: inherit; text-decoration: none; cursor: pointer;">01019044529</a></p>
+                        <p class="small">خدمة العملاء 24/24 طوال الأسبوع</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="info-icon">📧</div>
+                        <h3>البريد الإلكتروني</h3>
+                        <p><a href="mailto:www.mohamed12.link@gmail.com" style="color: inherit; text-decoration: none; cursor: pointer;">www.mohamed12.link@gmail.com</a></p>
+                        <p class="small">سنرد على بريدك في خلال 24 ساعة</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="info-icon">📍</div>
+                        <h3>العنوان</h3>
+                        <p>كفرالشيخ، شارع الاستاد</p>
+                        <p class="small">مصر</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="info-icon">⏰</div>
+                        <h3>ساعات العمل</h3>
+                        <p>من الساعة 9 صباحاً حتى 12 مساءً</p>
+                        <p class="small">جميع أيام الأسبوع</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <div class="info-icon">🛡️</div>
+                        <h3>الدعم الفني</h3>
+                        <p>24/24 طوال السنة</p>
+                        <p class="small">دعم عملاء احترافي وسريع 24/24</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- نموذج التواصل -->
+            <section class="contact-form-section">
+                <div class="form-wrapper">
+                    <div class="section-header">
+                        <h2>أرسل لنا رسالتك</h2>
+                        <p>سنكون سعداء بسماع منك</p>
+                    </div>
+
+                    <form id="contact-form" class="professional-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">الاسم الكامل *</label>
+                                <input type="text" id="name" name="name" placeholder=" محمد سعد " required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">البريد الإلكتروني *</label>
+                                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">رقم الهاتف</label>
+                                <input type="tel" id="phone" name="phone" placeholder="01019044529">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">الموضوع *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">اختر موضوع الرسالة</option>
+                                    <option value="استفسار">استفسار عن المنتجات</option>
+                                    <option value="شكوى">شكوى أو مشكلة</option>
+                                    <option value="اقتراح">اقتراح أو ملاحظة</option>
+                                    <option value="أخرى">أخرى</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group full">
+                            <label for="message">الرسالة *</label>
+                            <textarea id="message" name="message" placeholder="اكتب رسالتك هنا..." rows="6" required></textarea>
+                        </div>
+
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label for="privacy">أوافق على سياسة الخصوصية والشروط والأحكام</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">📨 أرسل الرسالة</button>
+                    </form>
+
+                    <div id="form-response" class="form-response" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- الأسئلة الشائعة -->
+            <section class="faq-section">
+                <div class="section-header">
+                    <h2>الأسئلة الشائعة</h2>
+                    <p>إجابات للأسئلة الشائعة التي تلقيناها</p>
+                </div>
+                <div class="faq-grid">
+                    <details class="faq-item">
+                        <summary>ما هي طرق الدفع المتاحة؟</summary>
+                        <p>نقدم عدة طرق دفع آمنة منها: التحويل البنكي، بطاقات الائتمان، محافظ رقمية، والدفع عند الاستلام.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>كم مدة التوصيل؟</summary>
+                        <p>التوصيل عادة ما يستغرق 2-5 أيام عمل حسب المنطقة الجغرافية والمنتج المطلوب.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>هل هناك ضمان على المنتجات؟</summary>
+                        <p>نعم، جميع منتجاتنا مشمولة بضمان شامل يغطي العيوب الصناعية لمدة سنة واحدة على الأقل.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>ما هي سياسة الاسترجاع؟</summary>
+                        <p>يمكنك استرجاع أي منتج خلال 30 يوم من الشراء بدون أسئلة وبدون تكاليف شحن إضافية.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>هل توجد خصومات للكميات الكبيرة؟</summary>
+                        <p>نعم، نقدم خصومات خاصة للطلبيات الكبيرة والعملاء المتكررين. تواصل معنا للمزيد من التفاصيل.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>كيف أتتبع طلبيتي؟</summary>
+                        <p>سيتم إرسال رقم تتبع لبريدك الإلكتروني وسيكون بإمكانك تتبع الطلبية في أي وقت من خلال موقعنا.</p>
+                    </details>
+                </div>
+            </section>
+
+            <!-- خريطة -->
+            <section class="map-section">
+                <h2 style="text-align: center; margin-bottom: 30px;">موقعنا على الخريطة</h2>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3387.234567890123!2d30.932!3d31.155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f98f4b5c5c5c5d%3A0x1234567890abcdef!2sKafr%20El-Sheikh%20Governorate!5e0!3m2!1sar!2seg!4v1234567890" width="100%" height="400" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div style="text-align: center; margin-top: 20px; font-size: 1.2em; color: #1e3c72;">
+                        📍 <strong>كفرالشيخ، شارع الاستاد - مصر</strong>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>عن المنصة</h3>
+                <p>منصة متخصصة في تجارة الأثاث والديكور المنزلي الفاخر بأعلى جودة</p>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="shop.html">المتجر</a></li>
+                    <li><a href="about.html">عن المنصة</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تابعنا</h3>
+                <div class="social-links">
+                    <a href="#" title="فيسبوك">f</a>
+                    <a href="#" title="تويتر">𝕏</a>
+                    <a href="#" title="إنستجرام">📷</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>🏪 منصة الأثاث والديكور الفاخرة © 2026 | جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="js/shared.js"></script>
+    <script src="js/admin-panel.js"></script>
+    <script>
+        // معالج نموذج التواصل
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            console.log('تم إرسال الرسالة:', formData);
+            
+            const response = document.getElementById('form-response');
+            response.innerHTML = '✅ شكراً لك! تم استقبال رسالتك بنجاح. سنقوم بالرد عليك في أقرب وقت.';
+            response.className = 'form-response success';
+            response.style.display = 'block';
+
+            this.reset();
+            setTimeout(() => {
+                response.style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

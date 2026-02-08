@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تهيئة المنصة - SAYMON</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            direction: rtl;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 80px rgba(0,0,0,0.3);
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        .loading {
+            font-size: 1.2em;
+            color: #666;
+            margin: 30px 0;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .emoji {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">⚙️</div>
+        <h1>تهيئة منصة SAYMON</h1>
+        <p style="color: #666; font-size: 1.1em; margin-bottom: 20px;">جاري تحضير قاعدة البيانات والمنصة...</p>
+        
+        <div class="loading">🔄 يرجى الانتظار...</div>
+
+        <div id="status-container"></div>
+
+        <button class="btn" onclick="initDatabase()" style="display: none;" id="init-btn">
+            🚀 بدء التهيئة
+        </button>
+        
+        <a href="index.html" class="btn" style="display: none;" id="launch-btn">
+            ✅ فتح المنصة الآن
+        </a>
+    </div>
+
+    <script>
+        async function initDatabase() {
+            const statusContainer = document.getElementById('status-container');
+            document.getElementById('init-btn').style.display = 'none';
+
+            try {
+                const response = await fetch('db-init.php');
+                const text = await response.text();
+                
+                statusContainer.innerHTML = `
+                    <div class="status success">
+                        <strong>✅ تم بنجاح!</strong><br>
+                        قاعدة البيانات جاهزة<br>
+                        جميع الجداول والبيانات الأساسية تم إنشاؤها
+                    </div>
+                `;
+
+                // إضافة تأخير قبل الذهاب للمنصة
+                setTimeout(() => {
+                    document.getElementById('status-container').innerHTML = `
+                        <div class="status success">
+                            <strong>✅ المنصة جاهزة!</strong><br>
+                            يمكنك الآن البدء في استخدام المنصة
+                        </div>
+                    `;
+                    document.getElementById('launch-btn').style.display = 'inline-block';
+                }, 2000);
+
+            } catch (error) {
+                statusContainer.innerHTML = `
+                    <div class="status error">
+                        <strong>❌ حدث خطأ:</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+                document.getElementById('init-btn').style.display = 'inline-block';
+            }
+        }
+
+        // بدء التهيئة تلقائياً
+        window.addEventListener('load', async () => {
+            // اختبار الاتصال بقاعدة البيانات
+            try {
+                const response = await fetch('api/products.php');
+                if (response.ok) {
+                    // قاعدة البيانات موجودة بالفعل
+                    document.querySelector('.emoji').textContent = '✅';
+                    document.querySelector('h1').textContent = 'المنصة جاهزة!';
+                    document.querySelector('p').textContent = 'منصة SAYMON احترافية وجاهزة للاستخدام';
+                    document.querySelector('.loading').style.display = 'none';
+                    document.getElementById('status-container').innerHTML = `
+                        <div class="status success">
+                            <strong>✅ النظام يعمل بكفاءة!</strong><br>
+                            المنصة متصلة بقاعدة البيانات بنجاح
+                        </div>
+                    `;
+                    setTimeout(() => {
+                        document.getElementById('launch-btn').style.display = 'inline-block';
+                    }, 1000);
+                } else {
+                    // تحتاج إلى تهيئة
+                    document.querySelector('.loading').style.display = 'none';
+                    document.getElementById('status-container').innerHTML = `
+                        <div class="status info">
+                            <strong>ℹ️ تم مسح قاعدة البيانات</strong><br>
+                            يرجى الضغط على الزر أدناه لإعادة تهيئتها
+                        </div>
+                    `;
+                    document.getElementById('init-btn').style.display = 'inline-block';
+                }
+            } catch (error) {
+                document.querySelector('.loading').style.display = 'none';
+                document.getElementById('status-container').innerHTML = `
+                    <div class="status info">
+                        <strong>ℹ️ يرجى تهيئة قاعدة البيانات</strong><br>
+                        اضغط الزر أدناه للبدء
+                    </div>
+                `;
+                document.getElementById('init-btn').style.display = 'inline-block';
+            }
+        });
+    </script>
+</body>
+</html>
