@@ -65,13 +65,8 @@ function addToCart(id, name) {
         
         alert(`✅ تمت إضافة "${name}" إلى السلة بنجاح!`);
         
-        // حذف من السيرفر
-        fetch('api/products.php', {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id })
-        })
-            .then(res => res.json())
+        // حذف من الـ مصدر (API أو localStorage)
+        ProductManager.delete(id)
             .then(data => {
                 if (data.success) {
                     // تحديث جميع الصفحات
@@ -112,22 +107,82 @@ const NavigationManager = {
 };
 
 // ========================================
-// إدارة المنتجات
+// إدارة المنتجات مع آلية احتياطية للعرض كـ static (fallback)
+// يحاول استدعاء الـ API أولاً، وإذا فشل يعمل محلياً باستخدام data/products.json + localStorage
 // ========================================
 
 const ProductManager = {
-    API_URL: 'data/products.json',
+    API_URL: 'api/products.php',
 
     fetch() {
+        // حاول الوصول للـ API أولاً
         return fetch(this.API_URL)
             .then(res => {
-                if (!res.ok) throw new Error('فشل تحميل المنتجات');
+                if (!res.ok) throw new Error('API not available');
                 return res.json();
             })
-            .catch(err => {
-                console.error('خطأ:', err);
-                throw err;
+            .catch(() => {
+                // فشل الاتصال بالـ API -> رجع من ملف JSON ثم دمج مع المنتجات المحلية من localStorage
+                return fetch('data/products.json')
+                    .then(r => r.json())
+                    .then(base => {
+                        const custom = JSON.parse(localStorage.getItem('customProducts') || '[]');
+                        return [...base, ...custom];
+                    })
+                    .catch(err => {
+                        console.error('خطأ في تحميل المنتجات من JSON:', err);
+                        return [];
+                    });
             });
+    },
+
+    create(product) {
+        // حاول POST للـ API
+        return fetch(this.API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(product)
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('API unavailable');
+            return res.json();
+        })
+        .catch(() => {
+            // فشل → احفظ محلياً في localStorage كنسخة مؤقتة
+            const custom = JSON.parse(localStorage.getItem('customProducts') || '[]');
+            // assign a temporary id if not provided
+            const id = 'local-' + Date.now();
+            const item = Object.assign({ id }, product);
+            custom.push(item);
+            localStorage.setItem('customProducts', JSON.stringify(custom));
+            return { success: true, id };
+        });
+    },
+
+    update(id, data) {
+        return fetch(this.API_URL, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.assign({ id }, data))
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('API unavailable');
+            return res.json();
+        })
+        .catch(() => {
+            // تحديث محلي داخل localStorage إذا كان موجوداً
+            let custom = JSON.parse(localStorage.getItem('customProducts') || '[]');
+            let found = false;
+            custom = custom.map(p => {
+                if (p.id == id || p.id === id) { found = true; return Object.assign({}, p, data); }
+                return p;
+            });
+            if (found) {
+                localStorage.setItem('customProducts', JSON.stringify(custom));
+                return { success: true };
+            }
+            return { success: false, error: 'not_found_local' };
+        });
     },
 
     delete(id) {
@@ -136,11 +191,21 @@ const ProductManager = {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id })
         })
-            .then(res => res.json())
-            .catch(err => {
-                console.error('خطأ:', err);
-                throw err;
-            });
+        .then(res => {
+            if (!res.ok) throw new Error('API unavailable');
+            return res.json();
+        })
+        .catch(() => {
+            // احذف محلياً إذا موجود
+            let custom = JSON.parse(localStorage.getItem('customProducts') || '[]');
+            const before = custom.length;
+            custom = custom.filter(p => !(p.id == id || p.id === id));
+            if (custom.length !== before) {
+                localStorage.setItem('customProducts', JSON.stringify(custom));
+                return { success: true };
+            }
+            return { success: false, error: 'not_found_local' };
+        });
     }
 };
 

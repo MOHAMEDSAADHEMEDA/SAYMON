@@ -1054,38 +1054,195 @@ footer {
     border: 2px solid #28a745;
 }
 
+/* ========== ADMIN MODAL RESPONSIVE ========== */
+#admin-modal {
+    overflow-y: auto !important;
+}
+
+#admin-modal > div {
+    width: 95% !important;
+    margin: 10px auto !important;
+}
+
 /* ========== RESPONSIVE DESIGN ========== */
-@media (max-width: 768px) {
+
+/* ========== MOBILE: Extra Small Screens (< 480px) ========== */
+@media (max-width: 479px) {
+    #admin-modal > div {
+        width: 98% !important;
+        margin: 5px auto !important;
+        max-width: 100% !important;
+    }
+
+    #admin-modal > div > div:first-child {
+        padding: 15px 10px !important;
+        flex-direction: column;
+    }
+
+    #admin-modal > div > div:first-child h2 {
+        font-size: 1.4em !important;
+    }
+
+    #admin-modal > div > div:first-child span {
+        font-size: 24px !important;
+    }
+
+    #admin-modal > div > div:nth-child(2) {
+        padding: 15px 10px !important;
+    }
+
+    #products-tab,
+    #analytics-tab,
+    #settings-tab {
+        padding: 0 !important;
+    }
+
+    #products-tab h3,
+    #analytics-tab h3,
+    #settings-tab h3 {
+        font-size: 1.1em !important;
+    }
+
+    #products-tab h4,
+    #analytics-tab h4,
+    #settings-tab h4 {
+        font-size: 1em !important;
+    }
+
+    #admin-modal input,
+    #admin-modal textarea,
+    #admin-modal button {
+        font-size: 0.9em !important;
+    }
+
+    #admin-modal div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    #products-list {
+        max-height: 250px !important;
+    }
+
+    * {
+        font-size: 14px;
+    }
+
+    body {
+        font-size: 13px;
+    }
+
     .header-container {
         flex-direction: column;
-        padding: 15px 20px;
-        gap: 15px;
+        padding: 10px 15px;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 1.2em;
     }
 
     nav {
         flex-direction: column;
-        gap: 10px;
+        gap: 5px;
         width: 100%;
+        order: 3;
+    }
+
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 0.9em;
+    }
+
+    .icons {
+        gap: 10px;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .hero-section {
+        padding: 30px 15px;
     }
 
     .hero-title {
-        font-size: 2em;
+        font-size: 1.5em;
+        margin-bottom: 10px;
     }
 
     .hero-subtitle {
-        font-size: 1.1em;
+        font-size: 0.95em;
+    }
+
+    .hero-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .stat-box {
+        padding: 20px 15px;
+    }
+
+    .stat-number {
+        font-size: 2em;
+    }
+
+    .stat-label {
+        font-size: 0.9em;
     }
 
     .section-header h2 {
-        font-size: 1.8em;
+        font-size: 1.5em;
     }
 
     .form-row {
         grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    .benefit-card {
+        padding: 20px 15px;
+    }
+
+    .benefit-icon {
+        font-size: 2.2em;
+    }
+
+    .category-card {
+        padding: 20px 15px;
+    }
+
+    .category-emoji {
+        font-size: 2em;
+    }
+
+    .product-card {
+        padding: 10px;
+    }
+
+    .product-card img {
+        height: 150px;
+    }
+
+    .product-info {
+        padding: 12px;
+    }
+
+    .product-price {
+        font-size: 1.1em;
     }
 
     .intro-content {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .mission-vision-container {
@@ -1093,7 +1250,7 @@ footer {
     }
 
     .footer-content {
-        padding: 30px 20px;
+        padding: 20px 15px;
     }
 
     main {
@@ -1113,11 +1270,11 @@ footer {
     .awards-section,
     .contact-container,
     .cta-section {
-        padding: 40px 20px;
+        padding: 30px 15px;
     }
 
     .form-wrapper {
-        padding: 30px 20px;
+        padding: 20px 15px;
     }
 
     .faq-grid {
@@ -1125,10 +1282,357 @@ footer {
     }
 
     .header-content h1 {
-        font-size: 1.8em;
+        font-size: 1.4em;
     }
 
     .header-content p {
-        font-size: 1.1em;
+        font-size: 0.95em;
+    }
+
+    .testimonial-card {
+        padding: 20px 15px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    table {
+        font-size: 0.85em;
+    }
+
+    .button,
+    button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* ========== TABLET: Small to Medium Screens (480px - 768px) ========== */
+@media (min-width: 480px) and (max-width: 768px) {
+    .header-container {
+        flex-direction: row;
+        padding: 15px 25px;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    nav {
+        flex-direction: row;
+        gap: 15px;
+        flex-wrap: wrap;
+        order: auto;
+    }
+
+    .nav-link {
+        padding: 7px 12px;
+        font-size: 0.95em;
+    }
+
+    .hero-title {
+        font-size: 1.8em;
+    }
+
+    .hero-subtitle {
+        font-size: 1.05em;
+    }
+
+    .section-header h2 {
+        font-size: 1.7em;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .stat-box {
+        padding: 25px;
+    }
+
+    .benefit-card {
+        padding: 30px 20px;
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .product-card {
+        padding: 12px;
+    }
+
+    .product-card img {
+        height: 180px;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .intro-content {
+        grid-template-columns: 1fr;
+    }
+
+    .mission-vision-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-content {
+        padding: 30px 25px;
+    }
+
+    main {
+        padding: 0;
+    }
+
+    .stats-section,
+    .featured-section,
+    .benefits-section,
+    .categories-section,
+    .testimonials-section,
+    .page-header,
+    .intro-section,
+    .mission-vision-section,
+    .features-section,
+    .team-section,
+    .awards-section,
+    .contact-container,
+    .cta-section {
+        padding: 40px 25px;
+    }
+
+    .form-wrapper {
+        padding: 30px 25px;
+    }
+
+    .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .header-content h1 {
+        font-size: 1.7em;
+    }
+
+    .header-content p {
+        font-size: 1.05em;
+    }
+}
+
+/* ========== GLOBAL RESPONSIVE IMAGES ========== */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ========== GLOBAL RESPONSIVE TABLES ========== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: auto;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: right;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #1e3c72;
+}
+
+/* ========== RESPONSIVE TABLE FOR MOBILE ========== */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+    
+    td {
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+    }
+    
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+        background: #f8f9fa;
+        padding: 12px;
+        width: 45%;
+        text-align: right;
+    }
+}
+
+/* ========== RESPONSIVE FORMS ========== */
+form {
+    width: 100%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* ========== RESPONSIVE HERO SECTION ========== */
+.hero-section {
+    background-size: cover;
+    background-position: center;
+}
+
+/* ========== RESPONSIVE PRODUCT GRID ========== */
+#product-list,
+#featured-products,
+#admin-products-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+@media (max-width: 480px) {
+    #product-list,
+    #featured-products,
+    #admin-products-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    #product-list,
+    #featured-products,
+    #admin-products-list {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    #product-list,
+    #featured-products,
+    #admin-products-list {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (min-width: 1025px) {
+    #product-list,
+    #featured-products,
+    #admin-products-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 25px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .header-container {
+        padding: 18px 30px;
+        gap: 25px;
+    }
+
+    nav {
+        gap: 20px;
+    }
+
+    .hero-title {
+        font-size: 2.3em;
+    }
+
+    .section-header h2 {
+        font-size: 1.9em;
+    }
+
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .intro-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .mission-vision-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ========== DESKTOP: Large Screens (> 1024px) ========== */
+@media (min-width: 1025px) {
+    .header-container {
+        padding: 20px 40px;
+    }
+
+    .stats-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .categories-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .intro-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .mission-vision-container {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

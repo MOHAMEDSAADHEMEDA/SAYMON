@@ -2,7 +2,7 @@
 
 let allProducts = [];
 let editingId = null;
-const API_URL = 'data/products.json';
+const API_URL = 'api/products.php';
 
 // تحميل المنتجات عند فتح الصفحة
 document.addEventListener('DOMContentLoaded', function() {
@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // تحميل المنتجات من السيرفر
 function loadProducts() {
-    fetch(API_URL)
-        .then(res => res.json())
+    ProductManager.fetch()
         .then(products => {
-            allProducts = products;
+            allProducts = Array.isArray(products) ? products : [];
             displayProducts();
         })
         .catch(err => {
             console.error(err);
+            showMessage('❌ خطأ في تحميل المنتجات', 'error');
         });
 }
 
@@ -29,6 +29,11 @@ function displayProducts() {
     if (!list) return;
     
     list.innerHTML = '';
+    
+    if (!allProducts || allProducts.length === 0) {
+        list.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">لا توجد منتجات حالياً</p>';
+        return;
+    }
     
     allProducts.forEach(product => {
         const card = document.createElement('div');
@@ -51,7 +56,7 @@ function displayProducts() {
 
 // فتح نموذج التعديل
 function editProduct(id) {
-    const product = allProducts.find(p => p.id === id);
+    const product = allProducts.find(p => p.id == id);
     if (!product) return;
     
     editingId = id;
@@ -92,14 +97,9 @@ function saveProduct(e) {
     if (editingId) {
         // تحديث منتج موجود
         productData.id = editingId;
-        fetch(API_URL, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(productData)
-        })
-            .then(res => res.json())
+        ProductManager.update(editingId, productData)
             .then(data => {
-                if (data.success) {
+                if (data.success || data.message) {
                     showMessage('✅ تم تحديث المنتج بنجاح', 'success');
                     editingId = null;
                     loadProducts();
@@ -114,14 +114,9 @@ function saveProduct(e) {
             });
     } else {
         // إضافة منتج جديد
-        fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(productData)
-        })
-            .then(res => res.json())
+        ProductManager.create(productData)
             .then(data => {
-                if (data.success) {
+                if (data.success || data.id) {
                     showMessage('✅ تم إضافة منتج جديد بنجاح', 'success');
                     loadProducts();
                     resetForm();
@@ -138,18 +133,13 @@ function saveProduct(e) {
 
 // حذف منتج من السيرفر
 function deleteProduct(id) {
-    const product = allProducts.find(p => p.id === id);
+    const product = allProducts.find(p => p.id == id);
     if (!product) return;
     
     if (confirm(`هل أنت متأكد من حذف المنتج "${product.name}"؟`)) {
-        fetch(API_URL, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id })
-        })
-            .then(res => res.json())
+        ProductManager.delete(id)
             .then(data => {
-                if (data.success) {
+                if (data.success || data.message) {
                     showMessage(`✅ تم حذف المنتج "${product.name}"`, 'success');
                     loadProducts();
                 } else {

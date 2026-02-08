@@ -194,7 +194,7 @@ const adminModalHTML = `
 const AdminPanel = {
     allProducts: [],
     editingId: null,
-    apiUrl: 'data/products.json',
+    apiUrl: 'api/products.php',
 
     init() {
         // إضافة HTML و CSS للصفحة
@@ -214,6 +214,22 @@ const AdminPanel = {
         // تحميل المنتجات والإستماع للـ Form
         this.loadProducts();
         document.getElementById('admin-product-form')?.addEventListener('submit', (e) => this.saveProduct(e));
+
+        // زر استيراد المنتجات المحلية (من localStorage)
+        const header = document.querySelector('.admin-modal-header');
+        if (header) {
+            const imp = document.createElement('button');
+            imp.textContent = '⬆️ استيراد المنتجات المحلية';
+            imp.style.background = 'transparent';
+            imp.style.color = 'white';
+            imp.style.border = '1px solid rgba(255,255,255,0.2)';
+            imp.style.padding = '8px 12px';
+            imp.style.borderRadius = '6px';
+            imp.style.cursor = 'pointer';
+            imp.style.marginLeft = '10px';
+            imp.onclick = () => this.importLocalProducts();
+            header.appendChild(imp);
+        }
 
         // إغلاق الـ Modal عند الضغط على الخلفية
         document.getElementById('admin-modal')?.addEventListener('click', (e) => {
@@ -241,10 +257,9 @@ const AdminPanel = {
     },
 
     loadProducts() {
-        fetch(this.apiUrl)
-            .then(res => res.json())
+        ProductManager.fetch()
             .then(products => {
-                this.allProducts = products;
+                this.allProducts = products || [];
                 this.displayProducts();
             })
             .catch(err => {
@@ -319,12 +334,7 @@ const AdminPanel = {
 
         if (this.editingId) {
             productData.id = this.editingId;
-            fetch(this.apiUrl, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(productData)
-            })
-                .then(res => res.json())
+            ProductManager.update(this.editingId, productData)
                 .then(data => {
                     if (data.success) {
                         this.showMessage('✅ تم تحديث المنتج بنجاح', 'success');
@@ -341,12 +351,7 @@ const AdminPanel = {
                     this.showMessage('❌ خطأ في الاتصال بالسيرفر', 'error');
                 });
         } else {
-            fetch(this.apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(productData)
-            })
-                .then(res => res.json())
+            ProductManager.create(productData)
                 .then(data => {
                     if (data.success) {
                         this.showMessage('✅ تم إضافة منتج جديد بنجاح', 'success');
@@ -369,12 +374,7 @@ const AdminPanel = {
         if (!product) return;
 
         if (confirm(`هل أنت متأكد من حذف المنتج "${product.name}"؟`)) {
-            fetch(this.apiUrl, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id })
-            })
-                .then(res => res.json())
+            ProductManager.delete(id)
                 .then(data => {
                     if (data.success) {
                         this.showMessage(`✅ تم حذف المنتج "${product.name}"`, 'success');
@@ -395,6 +395,38 @@ const AdminPanel = {
         document.getElementById('admin-product-form')?.reset();
         document.getElementById('form-title').textContent = '➕ إضافة منتج جديد';
         this.editingId = null;
+    },
+
+    importLocalProducts() {
+        const custom = JSON.parse(localStorage.getItem('customProducts') || '[]');
+        if (!custom || custom.length === 0) {
+            this.showMessage('لا توجد منتجات محلية للاستيراد', 'error');
+            return;
+        }
+
+        if (!confirm(`هل تريد استيراد ${custom.length} منتج محلي إلى المنصة؟ (سيتم نقلها إلى السيرفر أو ملف data/products.json)`)) return;
+
+        fetch('api/import_products.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(custom)
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.success) {
+                // مسح النسخ المحلية بعد الاستيراد
+                localStorage.removeItem('customProducts');
+                this.showMessage(`✅ تم استيراد ${res.imported || custom.length} منتج بنجاح`, 'success');
+                this.loadProducts();
+                this.refreshAllPages();
+            } else {
+                this.showMessage('❌ فشل الاستيراد: ' + (res.error || ''), 'error');
+            }
+        })
+        .catch(err => {
+            console.error('خطأ استيراد:', err);
+            this.showMessage('❌ خطأ في الاتصال أثناء الاستيراد', 'error');
+        });
     },
 
     showMessage(message, type = 'success') {
