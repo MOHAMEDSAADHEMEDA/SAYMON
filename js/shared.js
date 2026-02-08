@@ -116,7 +116,7 @@ const NavigationManager = {
 // ========================================
 
 const ProductManager = {
-    API_URL: 'api/products.php',
+    API_URL: 'data/products.json',
 
     fetch() {
         return fetch(this.API_URL)

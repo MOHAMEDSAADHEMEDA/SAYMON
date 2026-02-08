@@ -6,13 +6,16 @@ function loadFeaturedProducts() {
     fetch('api/products.php')
         .then(res => res.json())
         .then(products => {
-            const featured = products ? products.slice(0, 6) : [];
+            // دمج المنتجات من API مع المنتجات المخزنة محلياً
+            const customProducts = JSON.parse(localStorage.getItem('customProducts') || '[]');
+            const allProducts = [...products, ...customProducts];
+            const featured = allProducts.slice(0, 6);
             const list = document.createElement('div');
             list.style.display = 'grid';
             list.style.gridTemplateColumns = 'repeat(auto-fill, minmax(250px, 1fr))';
             list.style.gap = '25px';
 
-            if (!featured || featured.length === 0) {
+            if (!allProducts || allProducts.length === 0) {
                 list.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">لا توجد منتجات متاحة</p>';
                 featuredSection.appendChild(list);
                 return;
@@ -37,10 +40,37 @@ function loadFeaturedProducts() {
             featuredSection.appendChild(list);
         })
         .catch(err => {
-            console.error('خطأ:', err);
+            // في حالة الخطأ في الـ API، استخدم المنتجات المحلية فقط
+            const customProducts = JSON.parse(localStorage.getItem('customProducts') || '[]');
+            const featured = customProducts.slice(0, 6);
+            const list = document.createElement('div');
+            list.style.display = 'grid';
+            list.style.gridTemplateColumns = 'repeat(auto-fill, minmax(250px, 1fr))';
+            list.style.gap = '25px';
+
+            if (featured.length === 0) {
+                list.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">لا توجد منتجات متاحة</p>';
+            } else {
+                featured.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    const btn = `<button onclick="addProductToCart('${product.id}', '${product.name}', ${product.price}, '${product.image}')" style="width: 100%;">🛒 أضف للسلة</button>`;
+                    card.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/250x200?text=${product.name}'" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <p style="color: #999; font-size: 0.9em;">${product.category}</p>
+                            <div class="product-price">${product.price} ج.م</div>
+                            ${btn}
+                        </div>
+                    `;
+                    list.appendChild(card);
+                });
+            }
             const featuredSection = document.getElementById('featured-products');
             if (featuredSection) {
-                featuredSection.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">خطأ في تحميل المنتجات</p>';
+                featuredSection.innerHTML = '';
+                featuredSection.appendChild(list);
             }
         });
 }

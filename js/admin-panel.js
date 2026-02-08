@@ -194,7 +194,7 @@ const adminModalHTML = `
 const AdminPanel = {
     allProducts: [],
     editingId: null,
-    apiUrl: 'api/products.php',
+    apiUrl: 'data/products.json',
 
     init() {
         // إضافة HTML و CSS للصفحة

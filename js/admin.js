@@ -2,7 +2,7 @@
 
 let allProducts = [];
 let editingId = null;
-const API_URL = 'api/products.php';
+const API_URL = 'data/products.json';
 
 // تحميل المنتجات عند فتح الصفحة
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,12 +15,11 @@ function loadProducts() {
     fetch(API_URL)
         .then(res => res.json())
         .then(products => {
-            allProducts = Array.isArray(products) ? products : [];
+            allProducts = products;
             displayProducts();
         })
         .catch(err => {
             console.error(err);
-            showMessage('❌ خطأ في تحميل المنتجات من السيرفر', 'error');
         });
 }
 
@@ -30,11 +29,6 @@ function displayProducts() {
     if (!list) return;
     
     list.innerHTML = '';
-    
-    if (!allProducts || allProducts.length === 0) {
-        list.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">لا توجد منتجات حالياً</p>';
-        return;
-    }
     
     allProducts.forEach(product => {
         const card = document.createElement('div');
@@ -57,7 +51,7 @@ function displayProducts() {
 
 // فتح نموذج التعديل
 function editProduct(id) {
-    const product = allProducts.find(p => p.id == id);
+    const product = allProducts.find(p => p.id === id);
     if (!product) return;
     
     editingId = id;
@@ -105,7 +99,7 @@ function saveProduct(e) {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.success || data.message) {
+                if (data.success) {
                     showMessage('✅ تم تحديث المنتج بنجاح', 'success');
                     editingId = null;
                     loadProducts();
@@ -127,7 +121,7 @@ function saveProduct(e) {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.success || data.id) {
+                if (data.success) {
                     showMessage('✅ تم إضافة منتج جديد بنجاح', 'success');
                     loadProducts();
                     resetForm();
@@ -144,7 +138,7 @@ function saveProduct(e) {
 
 // حذف منتج من السيرفر
 function deleteProduct(id) {
-    const product = allProducts.find(p => p.id == id);
+    const product = allProducts.find(p => p.id === id);
     if (!product) return;
     
     if (confirm(`هل أنت متأكد من حذف المنتج "${product.name}"؟`)) {
@@ -155,7 +149,7 @@ function deleteProduct(id) {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.success || data.message) {
+                if (data.success) {
                     showMessage(`✅ تم حذف المنتج "${product.name}"`, 'success');
                     loadProducts();
                 } else {
